@@ -1,0 +1,624 @@
+@{
+    ViewData["Title"] = "Predict Crash Severity";
+}
+
+@model UtahTraffix.Models.predictData 
+
+<div>
+    <h1>Predict Crash Severity: </h1>
+
+
+    <form method="post" asp-action="Score" asp-controller="Home">
+        <div asp-validation-summary="All"></div>
+
+        @*<label asp-for="MILEPOINT">Milepoint:</label>
+        <input asp-for="MILEPOINT" /><br />
+
+        <label asp-for="LAT_UTM_Y">Lattitude :</label>
+        <input asp-for="LAT_UTM_Y" /><br />
+
+        <label asp-for="LONG_UTM_X">Longitude:</label>
+        <input asp-for="LONG_UTM_X" /><br />
+
+        <label asp-for="CITY">City:</label>
+        <input asp-for="CITY" /><br />
+
+        <label asp-for="COUNTY_NAME">County Name:</label>
+        <input asp-for="COUNTY_NAME" /><br />*@
+
+        @*<label asp-for="WORK_ZONE_RELATED">Work Zone Related:</label>
+        <input asp-for="WORK_ZONE_RELATED"  /><br />*@
+
+        @*<label asp-for="IMPROPER_RESTRAINT">Improper Restraint:</label>
+        <input asp-for="IMPROPER_RESTRAINT"  /><br />*@
+
+        <label>City:</label>
+        <select>
+            <option>Select A City</option>
+            <option>Abraham </option>
+            <option>Adamsville </option>
+            <option>Alpine </option>
+            <option>Alta </option>
+            <option>Altamont </option>
+            <option>Amalga </option>
+            <option>American Fork </option>
+            <option>Aneth </option>
+            <option>Angle </option>
+            <option>Annabella </option>
+            <option>Antimony </option>
+            <option>Apple Valley </option>
+            <option>Aragonite </option>
+            <option>Arcadia </option>
+            <option>Aurora </option>
+            <option>Austin </option>
+            <option>Avon </option>
+            <option>Axtell </option>
+            <option>Ballard </option>
+            <option>Bauer </option>
+            <option>Bear River City </option>
+            <option>Beaver </option>
+            <option>Beaverdam </option>
+            <option>Benjamin </option>
+            <option>Benson </option>
+            <option>Beryl </option>
+            <option>Beryl Junction </option>
+            <option>Bicknell </option>
+            <option>Big Water </option>
+            <option>Birdseye </option>
+            <option>Blanding </option>
+            <option>Blue Creek </option>
+            <option>Bluebell </option>
+            <option>Bluff </option>
+            <option>Bluffdale </option>
+            <option>Bonanza </option>
+            <option>Boneta </option>
+            <option>Bothwell </option>
+            <option>Boulder </option>
+            <option>Bountiful </option>
+            <option>Brian Head </option>
+            <option>Bridgeland </option>
+            <option>Brigham City </option>
+            <option>Brighton </option>
+            <option>Bryce Canyon </option>
+            <option>Bryce Canyon City </option>
+            <option>Burmester </option>
+            <option>Cache </option>
+            <option>Cache Junction </option>
+            <option>Caineville </option>
+            <option>Callao </option>
+            <option>Cannonville </option>
+            <option>Carbonville </option>
+            <option>Castle Dale </option>
+            <option>Castle Valley </option>
+            <option>Cedar City </option>
+            <option>Cedar Fort </option>
+            <option>Cedar Highlands </option>
+            <option>Cedar Hills </option>
+            <option>Cedarview </option>
+            <option>Center Creek </option>
+            <option>Centerfield </option>
+            <option>Centerville </option>
+            <option>Central </option>
+            <option>Central Valley </option>
+            <option>Charleston </option>
+            <option>Chester </option>
+            <option>Circleville </option>
+            <option>Clarkston </option>
+            <option>Clawson </option>
+            <option>Clearfield </option>
+            <option>Cleveland </option>
+            <option>Clinton </option>
+            <option>Clive </option>
+            <option>Coalville </option>
+            <option>College Ward </option>
+            <option>Collinston </option>
+            <option>Colton </option>
+            <option>Copperton </option>
+            <option>Corinne </option>
+            <option>Cornish </option>
+            <option>Cottonwood Heights </option>
+            <option>Cove </option>
+            <option>Cove Fort </option>
+            <option>Croydon </option>
+            <option>Curlew Junction </option>
+            <option>Dammeron Valley </option>
+            <option>Daniel </option>
+            <option>Delle </option>
+            <option>Delta </option>
+            <option>Deseret </option>
+            <option>Dewey (Deweyville) </option>
+            <option>Deweyville </option>
+            <option>Dividend </option>
+            <option>Draper </option>
+            <option>Duchesne </option>
+            <option>Dutch John </option>
+            <option>Eagle Mountain </option>
+            <option>East Carbon </option>
+            <option>Echo </option>
+            <option>Eden </option>
+            <option>Elberta </option>
+            <option>Elk Ridge </option>
+            <option>Elmo </option>
+            <option>Elsinore </option>
+            <option>Elwood </option>
+            <option>Emery </option>
+            <option>Emory </option>
+            <option>Enoch </option>
+            <option>Enterprise </option>
+            <option>Ephraim </option>
+            <option>Erda </option>
+            <option>Escalante </option>
+            <option>Eureka </option>
+            <option>Fairfield </option>
+            <option>Fairview </option>
+            <option>Farmington </option>
+            <option>Farr West </option>
+            <option>Faust </option>
+            <option>Fayette </option>
+            <option>Ferron </option>
+            <option>Fielding </option>
+            <option>Fillmore </option>
+            <option>Filmore </option>
+            <option>Flowell </option>
+            <option>Fort Duchesne </option>
+            <option>Fountain Green </option>
+            <option>Francis </option>
+            <option>Fremont </option>
+            <option>Fruit Heights </option>
+            <option>Fruitland </option>
+            <option>Garden City </option>
+            <option>Garfield </option>
+            <option>Garland </option>
+            <option>Genola </option>
+            <option>Glendale </option>
+            <option>Glenwood </option>
+            <option>Goshen </option>
+            <option>Grantsville </option>
+            <option>Green River </option>
+            <option>Greenville </option>
+            <option>Gunlock </option>
+            <option>Gunnison </option>
+            <option>Gusher </option>
+            <option>Hamiltons Fort </option>
+            <option>Hanksville </option>
+            <option>Hanna </option>
+            <option>Harrisburg </option>
+            <option>Harrisville </option>
+            <option>Hatch </option>
+            <option>Heber </option>
+            <option>Heber City </option>
+            <option>Helper </option>
+            <option>Henefer </option>
+            <option>Henrieville </option>
+            <option>Herriman </option>
+            <option>Hideout </option>
+            <option>Highland </option>
+            <option>Hildale </option>
+            <option>Hinckley </option>
+            <option>Holden </option>
+            <option>Holladay </option>
+            <option>Honeyville </option>
+            <option>Hooper </option>
+            <option>Howell </option>
+            <option>Hoytsville </option>
+            <option>Huntington </option>
+            <option>Huntsville </option>
+            <option>Hurricane </option>
+            <option>Hyde Park </option>
+            <option>Hyrum </option>
+            <option>Independence </option>
+            <option>Indianola </option>
+            <option>Interlaken </option>
+            <option>Ioka </option>
+            <option>Ivins </option>
+            <option>Jensen </option>
+            <option>Jordanelle </option>
+            <option>Joseph </option>
+            <option>Juab </option>
+            <option>Junction </option>
+            <option>Kamas </option>
+            <option>Kanab </option>
+            <option>Kanarraville </option>
+            <option>Kanosh </option>
+            <option>Kaysville </option>
+            <option>Kearns </option>
+            <option>Kenilworth </option>
+            <option>Kimball Junction </option>
+            <option>Kingston </option>
+            <option>Knolls </option>
+            <option>Koosharem </option>
+            <option>La Sal Junction </option>
+            <option>La Verkin </option>
+            <option>Lake Point </option>
+            <option>Lake Point Junction </option>
+            <option>Lake Shore </option>
+            <option>Lakepoint </option>
+            <option>Laketown </option>
+            <option>Lapoint </option>
+            <option>Lawrence </option>
+            <option>Layton </option>
+            <option>Leamington </option>
+            <option>Leeds </option>
+            <option>Lehi </option>
+            <option>Levan </option>
+            <option>Lewiston </option>
+            <option>Liberty </option>
+            <option>Lindon </option>
+            <option>Littleton </option>
+            <option>Loa </option>
+            <option>Lofgreen </option>
+            <option>Logan </option>
+            <option>Long Valley Junction </option>
+            <option>Lund </option>
+            <option>Lyman </option>
+            <option>Lynn </option>
+            <option>Lynndyl </option>
+            <option>Mack </option>
+            <option>Maeser </option>
+            <option>Magna </option>
+            <option>Mammoth </option>
+            <option>Manila </option>
+            <option>Manti </option>
+            <option>Mantua </option>
+            <option>Mapleton </option>
+            <option>Marion </option>
+            <option>Marriott </option>
+            <option>Marriott-Slaterville </option>
+            <option>Marysvale </option>
+            <option>Mayfield </option>
+            <option>Mendon </option>
+            <option>Mercur </option>
+            <option>Midvale </option>
+            <option>Midway </option>
+            <option>Milford </option>
+            <option>Millcreek </option>
+            <option>Mills Junction </option>
+            <option>Millville </option>
+            <option>Minersville </option>
+            <option value="1">Moab </option>
+            <option>Moark Junction </option>
+            <option>Modena </option>
+            <option>Mona </option>
+            <option>Monroe </option>
+            <option>Montezuma Creek </option>
+            <option>Monticello </option>
+            <option>Monument Valley </option>
+            <option>Moore </option>
+            <option>Morgan </option>
+            <option>Morgan City </option>
+            <option>Moroni </option>
+            <option>Mosida </option>
+            <option>Mount Pleasant </option>
+            <option>Mountain Green </option>
+            <option>Murray </option>
+            <option>Myton </option>
+            <option>Naples </option>
+            <option>Neola </option>
+            <option>Nephi </option>
+            <option>New Harmony </option>
+            <option>Newcastle </option>
+            <option>Newton </option>
+            <option>Nibley </option>
+            <option>North Creek </option>
+            <option>North Logan </option>
+            <option>North Ogden </option>
+            <option>North Salt Lake </option>
+            <option>Oak City </option>
+            <option>Oakley </option>
+            <option>Ogden </option>
+            <option>Ophir </option>
+            <option>Orangeville </option>
+            <option>Orderville </option>
+            <option value="1">Orem </option>
+            <option>Ouray </option>
+            <option>Outside City Limits </option>
+            <option>Palmyra </option>
+            <option>Panguitch </option>
+            <option>Paradise </option>
+            <option>Paragonah </option>
+            <option value="1">Park City </option>
+            <option>Park Valley </option>
+            <option>Parowan </option>
+            <option>Payson </option>
+            <option>Penrose </option>
+            <option>Peoa </option>
+            <option>Perry </option>
+            <option>Petersboro </option>
+            <option>Peterson </option>
+            <option>Pine Valley </option>
+            <option>Pinto </option>
+            <option>Pintura </option>
+            <option>Plain City </option>
+            <option>Pleasant Grove </option>
+            <option>Pleasant View </option>
+            <option>Plymouth </option>
+            <option>Portage </option>
+            <option>Porterville </option>
+            <option value="1">Price </option>
+            <option>Promontory </option>
+            <option>Promontory Point </option>
+            <option>Providence </option>
+            <option>Provo </option>
+            <option>Randlett </option>
+            <option>Randolph </option>
+            <option>Redmond </option>
+            <option>Richfield </option>
+            <option>Richmond </option>
+            <option>River Heights </option>
+            <option>Riverdale </option>
+            <option>Riverside </option>
+            <option>Riverton </option>
+            <option>Rockville </option>
+            <option>Rocky Ridge </option>
+            <option>Roosevelt </option>
+            <option>Rosette </option>
+            <option>Round Valley </option>
+            <option>Roy </option>
+            <option>Rush Valley </option>
+            <option>Salem </option>
+            <option>Salina </option>
+            <option>Salt Lake City </option>
+            <option>Salt Lake Junction </option>
+            <option>Saltair </option>
+            <option>Saltair Junction </option>
+            <option>Samak </option>
+            <option>Sandy </option>
+            <option>Sandy City </option>
+            <option>Santa Clara </option>
+            <option>Santaquin </option>
+            <option>Saratoga Springs </option>
+            <option>Scipio </option>
+            <option>Scofield </option>
+            <option>Sevier </option>
+            <option>Shivwits </option>
+            <option>Sigurd </option>
+            <option>Smithfield </option>
+            <option>Snowbird </option>
+            <option>Snowville </option>
+            <option>Snyder </option>
+            <option>Snyderville </option>
+            <option>Soldier Summit </option>
+            <option>South Jordan </option>
+            <option>South Ogden </option>
+            <option>South Salt Lake </option>
+            <option value="1">South Weber </option>
+            <option>South Willard </option>
+            <option>Spanish Fork </option>
+            <option>Spring City </option>
+            <option>Spring Glen </option>
+            <option>Spring Lake </option>
+            <option>Springdale </option>
+            <option>Springville </option>
+            <option value="1">St George </option>
+            <option>St. George </option>
+            <option>Stansbury Park </option>
+            <option>Sterling </option>
+            <option>Stockton </option>
+            <option>Stoddard </option>
+            <option>Strawberry </option>
+            <option>Summit </option>
+            <option>Sundance </option>
+            <option>Sunset </option>
+            <option>Syracuse </option>
+            <option>Tabiona </option>
+            <option>Taggarts </option>
+            <option>Talmage </option>
+            <option>Taylorsville </option>
+            <option>Terra </option>
+            <option>Thatcher </option>
+            <option>Thistle </option>
+            <option>Thompson </option>
+            <option>Thompson Springs </option>
+            <option>Ticaboo </option>
+            <option>Timber Lakes </option>
+            <option>Timpie </option>
+            <option>Tooele </option>
+            <option>Tooele Army Depot </option>
+            <option>Toquerville </option>
+            <option>Torrey </option>
+            <option>Tremonton </option>
+            <option>Trenton </option>
+            <option>Tridell </option>
+            <option>Tropic </option>
+            <option>Uintah </option>
+            <option>Unincorporated </option>
+            <option>Upalco </option>
+            <option>Venice </option>
+            <option>Verdure </option>
+            <option>Vernal </option>
+            <option>Vernon </option>
+            <option>Veyo </option>
+            <option>Vineyard </option>
+            <option>Virgin </option>
+            <option>Vivian Park </option>
+            <option>Wales </option>
+            <option>Wallsburg </option>
+            <option>Wanship </option>
+            <option>Wasatch </option>
+            <option>Washakie </option>
+            <option>Washington </option>
+            <option value="1">Washington Terrace </option>
+            <option>Wellington </option>
+            <option>Wellsville </option>
+            <option>Wendover </option>
+            <option>West Bountiful </option>
+            <option>West Haven </option>
+            <option value="1 ">West Jordan </option>
+            <option>West Point </option>
+            <option>West Valley </option>
+            <option>West Valley City </option>
+            <option>West Weber </option>
+            <option>White City </option>
+            <option>Whiterocks </option>
+            <option>Willard </option>
+            <option>Woodland </option>
+            <option>Woodland Hills </option>
+            <option>Woodruff </option>
+            <option>Woods Cross </option>
+        </select>
+        <br />
+
+        <label asp-for="COUNTY_NAME_SALT_LAKE">County:</label>
+        <select asp-for="COUNTY_NAME_SALT_LAKE">
+            <option>Select a County</option>
+            <option>Beaver</option>
+            <option>Box Elder</option>
+            <option>Cache</option>
+            <option>Carbon</option>
+            <option>Daggett</option>
+            <option>Davis</option>
+            <option>Duchesne</option>
+            <option>Emery</option>
+            <option>Garfield</option>
+            <option>Grand</option>
+            <option>Iron</option>
+            <option>Juab</option>
+            <option>Kane</option>
+            <option>Millard</option>
+            <option>Morgan</option>
+            <option>Piute</option>
+            <option>Rich</option>
+            <option value="1">Salt Lake</option>
+            <option>San Juan</option>
+            <option>Sanpete</option>
+            <option>Sevier</option>
+            <option>Summit</option>
+            <option>Tooele</option>
+            <option>Uintah</option>
+            <option>Utah</option>
+            <option>Wasatch</option>
+            <option>Washington</option>
+            <option>Wayne</option>
+            <option>Weber</option>
+        </select>
+        <br />
+
+        <label>Pedestrian Involved:</label>
+        <input asp-for="PEDESTRIAN_INVOLVED" type="radio" id="pedTrue" name="PEDESTRIAN_INVOLVED" value="1" />
+        <label for="pedTrue">True</label>
+        <input asp-for="PEDESTRIAN_INVOLVED" type="radio" id="pedFalse" name="PEDESTRIAN_INVOLVED" value="0" checked />
+        <label for="pedFalse">False</label><br />
+
+        <label>Motorcycle Involved:</label>
+        <input asp-for="MOTORCYCLE_INVOLVED" type="radio" id="MotorTrue" name="MOTORCYCLE_INVOLVED" value="1" />
+        <label for="MotorTrue">True</label>
+        <input asp-for="MOTORCYCLE_INVOLVED" type="radio" id="MotorFalse" name="MOTORCYCLE_INVOLVED" value="0" checked />
+        <label for="MotorFalse">False</label><br />
+
+        <label>Bicyclist Involved:</label>
+        <input asp-for="BICYCLIST_INVOLVED" type="radio" id="BikeTrue" name="BICYCLIST_INVOLVED" value="1" />
+        <label for="BikeTrue">True</label>
+        <input asp-for="BICYCLIST_INVOLVED" type="radio" id="BikeFalse" name="BICYCLIST_INVOLVED" value="0" checked />
+        <label for="BikeFalse">False</label><br />
+
+        <label>Overturn Rollover:</label>
+        <input asp-for="OVERTURN_ROLLOVER" type="radio" id="OverTrue" name="OVERTURN_ROLLOVER" value="1" />
+        <label for="OverTrue">True</label>
+        <input asp-for="OVERTURN_ROLLOVER" type="radio" id="OverFalse" name="OVERTURN_ROLLOVER" value="0" checked />
+        <label for="OverFalse">False</label><br />
+
+        <label>Unrestrained (Seatbelt):</label>
+        <input asp-for="UNRESTRAINED" type="radio" id="UnrestrTrue" name="UNRESTRAINED" value="1" />
+        <label for="UnrestrTrue">True</label>
+        <input asp-for="UNRESTRAINED" type="radio" id="UnrestrFalse" name="UNRESTRAINED" value="0" checked />
+        <label for="UnrestrFalse">False</label><br />
+
+        <label>DUI:</label>
+        <input asp-for="DUI" type="radio" id="DUITrue" name="DUI" value="1" />
+        <label for="DUITrue">True</label>
+        <input asp-for="DUI" type="radio" id="DUIFalse" name="DUI" value="0" checked />
+        <label for="DUIFalse">False</label><br />
+
+        <label>Roadway Departure:</label>
+        <input asp-for="ROADWAY_DEPARTURE" type="radio" id="DepTrue" name="ROADWAY_DEPARTURE" value="1" />
+        <label for="DepTrue">True</label>
+        <input asp-for="ROADWAY_DEPARTURE" type="radio" id="DepFalse" name="ROADWAY_DEPARTURE" value="0" checked />
+        <label for="DepFalse">False</label><br />
+
+        <label>Intersection Related:</label>
+        <input asp-for="INTERSECTION_RELATED" type="radio" id="IntersectionTrue" name="INTERSECTION_RELATED" value="1" />
+        <label for="IntersectionTrue">True</label>
+        <input asp-for="INTERSECTION_RELATED" type="radio" id="IntersectionFalse" name="INTERSECTION_RELATED" value="0" checked />
+        <label for="IntersectionFalse">False</label><br />
+
+        <label>Older Driver Involved:</label>
+        <input asp-for="OLDER_DRIVER_INVOLVED" type="radio" id="OldTrue" name="OLDER_DRIVER_INVOLVED" value="1" />
+        <label for="OldTrue">True</label>
+        <input asp-for="OLDER_DRIVER_INVOLVED" type="radio" id="OldFalse" name="OLDER_DRIVER_INVOLVED" value="0" checked />
+        <label for="OldFalse">False</label><br />
+
+        <label>Wild Animal Related:</label>
+        <input asp-for="WILD_ANIMAL_RELATED" type="radio" id="WildTrue" name="WILD_ANIMAL_RELATED" value="1" />
+        <label for="WildTrue">True</label>
+        <input asp-for="WILD_ANIMAL_RELATED" type="radio" id="WildFalse" name="WILD_ANIMAL_RELATED" value="0" checked />
+        <label for="WildFalse">False</label><br />
+
+        <label>Single Vehicle Involved:</label>
+        <input asp-for="SINGLE_VEHICLE" type="radio" id="SingleTrue" name="SINGLE_VEHICLE" value="1" />
+        <label for="SingleTrue">True</label>
+        <input asp-for="SINGLE_VEHICLE" type="radio" id="SingleFalse" name="SINGLE_VEHICLE" value="0" checked />
+        <label for="SingleFalse">False</label><br />
+
+        @*<label asp-for="MOTORCYCLE_INVOLVED">Motorcycle Involved:</label>
+        <input asp-for="MOTORCYCLE_INVOLVED" /><br />
+
+        <label asp-for="BICYCLIST_INVOLVED">Bicyclist Involved:</label>
+        <input asp-for="BICYCLIST_INVOLVED" /><br />
+
+        <label asp-for="OVERTURN_ROLLOVER">Overturn Rollover:</label>
+        <input asp-for="OVERTURN_ROLLOVER" /><br />
+
+        <label asp-for="UNRESTRAINED">Unrestrained:</label>
+        <input asp-for="UNRESTRAINED" /><br />
+
+        <label asp-for="DUI">DUI:</label>
+        <input asp-for="DUI" /><br />
+
+        <label asp-for="INTERSECTION_RELATED">Intersection Related:</label>
+        <input asp-for="INTERSECTION_RELATED"><br />
+
+        <label asp-for="OLDER_DRIVER_INVOLVED">Older Driver Involved:</label>
+        <input asp-for="OLDER_DRIVER_INVOLVED"><br />
+
+        <label asp-for="WILD_ANIMAL_RELATED">Wild Animal Related:</label>
+        <input asp-for="WILD_ANIMAL_RELATED"><br />
+
+        <label asp-for="SINGLE_VEHICLE_TRUE">Single Vehicle:</label>
+        <input asp-for="SINGLE_VEHICLE_TRUE"><br />*@
+
+        @*<label asp-for="DOMESTIC_ANIMAL_RELATED">Domestic Animal Related</label>
+        <input asp-for="DOMESTIC_ANIMAL_RELATED" ><br />*@
+
+        @*<label asp-for="COMMERCIAL_MOTOR_VEH_INVOLVED">Commerial Vehicle Involved:</label>
+        <input asp-for="COMMERCIAL_MOTOR_VEH_INVOLVED"  /><br />
+
+        <label asp-for="TEENAGE_DRIVER_INVOLVED">Teenage Driver Involved:</label>
+        <input asp-for="TEENAGE_DRIVER_INVOLVED" /><br />*@
+
+        @*<label asp-for="NIGHT_DARK_CONDITION">Night Driving:</label>
+        <input asp-for="NIGHT_DARK_CONDITION"  /><br />
+
+        <label asp-for="SINGLE_VEHICLE">Single Vehicle:</label>
+        <input asp-for="SINGLE_VEHICLE"  /><br />
+
+        <label asp-for="DISTRACTED_DRIVING">Distracted Driving:</label>
+        <input asp-for="DISTRACTED_DRIVING" /><br />
+
+        <label asp-for="DROWSY_DRIVING">Drowsy Driving:</label>
+        <input asp-for="DROWSY_DRIVING"  /><br />*@
+
+        <br />
+        <button class="btn btn-primary" type="submit">Predict</button>
+
+    </form>
+</div>
+
+@*<div>
+    <h2>Crash Severity Score:</h2>
+    <p>SCORE</p>
+
+
+    <div>@Prediction</div>
+
+
+</div>*@

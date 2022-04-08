@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Delete Confirmation";
+}
+
+@model UtahTraffix.Models.Crash
+
+
+<h2 class="myTitle">Confirm Deletion</h2>
+<br />
+<h3>Are you sure you want to delete the following crash from the database?</h3>
+<br />
+
+<table class="table table-sm table-striped table-bordered" style="justify-self:center; height:fit-content;">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Date</th>
+            <th scope="col">City</th>
+            <th scope="col">Severity</th>
+        </tr>
+    </thead>
+    <tbody>
+            <tr>
+                <td>@Model.CRASH_ID</td>
+                <td>@Model.CRASH_DATETIME</td>
+                <td>@Model.CITY</td>
+                <td>@Model.CRASH_SEVERITY_ID</td>
+            </tr>
+    </tbody>
+</table>
+<form method="post" asp-controller="Home" asp-action="DeleteCrash">
+    <button class="btn btn-danger" type="submit">Delete</button>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Cancel</a>
+
+    <input type="hidden" asp-for="CRASH_ID" />
+</form>

@@ -1,0 +1,22 @@
+﻿@page "/admin"
+@*@model UtahTraffix.Pages.Admin.IndexModel*@
+
+@{
+}
+
+@*@model RegisterModel
+@if (SignInManager.IsSignedIn(User))
+{ }*@
+
+<html>
+<head>
+    <title>Intex Admin</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <base href="/" />
+</head>
+
+<body>
+    <component type="typeof(Routed)" render-mode="Server" />
+    <script src="/_framework/blazor.server.js"></script>
+</body>
+</html>

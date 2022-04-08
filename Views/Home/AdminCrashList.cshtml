@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "Crash List";
+}
+@model List<Crash>
+<div class="main">
+    <h1 class="myTitle">Crashes</h1>
+    <form asp-action="CrashList" asp-route-page="@ViewBag.pageNum" method="get">
+        <label>Filter by </label>
+        <select name="filterColumn">
+            <option value="">Select</option>
+            <option value="CRASH_ID">Crash Id</option>
+            <option value="CRASH_DATETIME">Crash Date/Time</option>
+            <option value="ROUTE">Route</option>
+            <option value="MILEPOINT">Route</option>
+            <option value="LAT_UTM_Y">Latitude</option>
+            <option value="LONG_UTM_X">Longitude</option>
+            <option value="MAIN_ROAD_NAME">Road Name</option>
+            <option value="CITY">City</option>
+            <option value="COUNTY_NAME">County</option>
+            <option value="CRASH_SEVERITY_ID">Crash Severity</option>
+            <option value="WORK_ZONE_RELATED">Work Zone Related</option>
+            <option value="PEDESTRIAN_INVOLVED">Pedestrian Involved</option>
+            <option value="BICYCLIST_INVOLVED">Pedestrian Involved</option>
+            <option value="MOTORCYCLE_INVOLVED">Pedestrian Involved</option>
+            <option value="IMPROPER_RESTRAINT">Pedestrian Involved</option>
+            <option value="UNRESTRAINED">Pedestrian Involved</option>
+            <option value="DUI">Pedestrian Involved</option>
+            <option value="INTERSECTION_RELATED">Pedestrian Involved</option>
+            <option value="WILD_ANIMAL_RELATED">Pedestrian Involved</option>
+            <option value="DOMESTIC_ANIMAL_RELATED">Pedestrian Involved</option>
+            <option value="OVERTURN_ROLLOVER">Pedestrian Involved</option>
+            <option value="COMMERCIAL_MOTOR_VEH_INVOLVED">Pedestrian Involved</option>
+        </select>
+        <input type="text" name="searchString" />
+        <button type="submit">Filter</button>
+    </form>
+    <br />
+    <br />
+    <table class="table table-sm table-striped table-bordered" style="justify-self:center; height:fit-content;">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Date</th>
+                <th scope="col">City</th>
+                <th scope="col">Severity</th>
+                <th scope="col">Pedestrain Involved</th>
+                <th scope="col">Bicyclist Involved</th>
+                <th scope="col">Motorcycle Involved</th>
+                <th scope="col">Overturn</th>
+                <th scope="col"> </th>
+                <th scope="col"> </th>
+                <th scope="col"> </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in Model)
+            {
+            <tr>
+                <td>@c.CRASH_ID</td>
+                <td>@c.CRASH_DATETIME</td>
+                <td>@c.CITY</td>
+                <td>@c.CRASH_SEVERITY_ID</td>
+                <td>@c.PEDESTRIAN_INVOLVED</td>
+                <td>@c.BICYCLIST_INVOLVED</td>
+                <td>@c.MOTORCYCLE_INVOLVED</td>
+                <td>@c.OVERTURN_ROLLOVER</td>
+                <td><a href="/admin/crashes/details/@c.CRASH_ID">Details</a></td>
+                @*<td><a class="nav-link text-muted" asp-controller="Home" asp-action="EditCrash" asp-route-id="@c.CRASH_ID">Edit</a></td>
+        <td><a class="nav-link text-muted" asp-controller="Home" asp-action="DeleteCrash" asp-route-id="@c.CRASH_ID">Delete</a></td>*@
+                <td><a href="/admin/crashes/edit/@c.CRASH_ID">Edit</a></td>
+                <td><a href="/admin/crashes/delete/@c.CRASH_ID">Delete</a></td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+    <p>Page</p>
+    <p>
+        @if (ViewBag.pageNum != 1)
+        {
+            <a asp-action="CrashList" asp-route-page="@(ViewBag.pageNum - 1)">@(ViewBag.pageNum - 1)</a>
+        }
+        @ViewBag.pageNum
+        <a asp-action="CrashList" asp-route-page="@(ViewBag.pageNum + 1)">@(ViewBag.pageNum + 1)</a>
+    </p>
+</div>

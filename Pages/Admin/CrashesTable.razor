@@ -1,0 +1,49 @@
+﻿@*<table class="table table-sm table-striped table-bordered">
+
+    <thead>
+        <tr>
+            <th colspan="5" class="text-center">@TableTitle</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @if (Crashes?.Count() > 0)
+        {
+            @foreach (Crash c in Crashes)
+            {
+                <tr>
+                    <td>@c.CRASH_ID</td>
+                    <td>@c.CRASH_DATETIME</td>
+                    <td>@c.CRASH_SEVERITY_ID</td>
+                    <td>
+                        <NavLink class="btn btn-info btn-sm" href="@GetDetailsUrl(c.CRASH_ID)">Details</NavLink>
+                    </td>
+                    <td>
+                        <NavLink class="btn btn-warning btn-sm" href="@GetEditUrl(c.CRASH_ID)">Edit</NavLink>
+                    </td>
+
+                    <td>
+                        <button class="btn btn-sm btn-danger" @onclick="@(x => RemoveCrash(c))">Delete</button>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5" class="text-center">No Crashes To Display (make sure database is connected)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+    @code {
+        [Parameter]
+        public string TableTitle { get; set; } = "Crashes";
+
+        [Parameter]
+        public IEnumerable<Crash> Crashes { get; set; }
+
+        [Parameter]
+        public EventCallback<int> CrashSelected { get; set; }//perhaps don't worry about this one
+    }*@

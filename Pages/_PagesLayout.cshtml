@@ -1,0 +1,91 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+<html>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"] - Utah TrafFIX</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+    <link href="~/css/styles.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
+<body id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top text-muted" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="#page-top">Utah TrafFIX</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm justify-content-between">
+
+                <div>
+                    <ul class="navbar-nav flex-grow-1 text-white">
+
+                        <li class="nav-item">
+                            <a class="nav-link text-muted" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-muted" asp-area="" asp-controller="Home" asp-action="CrashList">List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-muted" asp-area="" asp-controller="Home" asp-action="Predict">Make a Prediction</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    
+                        <ul class="navbar-nav flex-grow-1 text-white">
+                            <li class="nav-item">
+                                <a class="nav-link text-muted" href="/admin">Crash Admin</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-muted" href="/Identity/Account/Register">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-muted" href="/Identity/Account/Login">Log In</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-muted" href="/Identity/Account/Manage">Manage Account</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-muted" href="/Identity/Account/Logout">Log Out</a>
+                            </li>
+                        </ul>
+                    
+                </div>
+
+            </div>
+        </div>
+    </nav>
+    <!-- Masthead-->
+    <div>
+        @RenderBody()
+    </div>
+
+
+
+    <!-- Footer-->
+    <footer id="myFooter" class="bg-black small text-center text-white-50">
+        <a asp-action="PrivacyPolicy" asp-controller="Home" class="">Privacy Policy </a>
+        <div class="">Copyright &copy; TrafFIX 2022</div>
+    </footer>
+
+
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="~/js/scripts.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

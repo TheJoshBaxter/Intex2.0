@@ -1,0 +1,138 @@
+﻿@page "/admin"
+@page "/admin/{currentPage:int}"
+@page "/admin/crashes"
+@page "/admin/crashes/{currentPage:int}"
+@inherits OwningComponentBase<ICrashRepository>
+
+<h1 class="myTitle myAdminTitle">Crashes</h1>
+<div class="row justify-content-around">
+    <div class="col-10">
+        <table class="table table-sm table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Crash ID</th>
+                    <th>Date/Time</th>
+                    <th>Crash Severity</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (CrashData?.Count() > 0)
+                {
+                    @foreach (Crash c in CrashData)
+                    {
+                        <tr>
+                            <td>@c.CRASH_ID</td>
+                            <td>@c.CRASH_DATETIME</td>
+                            <td>@c.CRASH_SEVERITY_ID</td>
+                            <td>
+                                <NavLink class="btn btn-info btn-sm" href="@GetDetailsUrl(c.CRASH_ID)">Details</NavLink>
+                            </td>
+                            <td>
+                                <NavLink class="btn btn-warning btn-sm" href="@GetEditUrl(c.CRASH_ID)">Edit</NavLink>
+                            </td>
+
+                            <td>
+                                <button class="btn btn-sm btn-danger" @onclick="@(x => RemoveCrash(c))">Delete</button>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5" class="text-center">No Crashes To Display (make sure database is connected)</td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+    <div id="myPages" class="row justify-content-between">
+        <div class="col-2"> <NavLink class="btn btn-primary" href="/admin/crashes/create">Add New Crash</NavLink></div>
+        <div class="col-4">
+            @if (currentPage > 1)
+            {
+                <NavLink class="btn btn-secondary btn-sm" href="@GetBackUrl(currentPage)">Previous Page</NavLink>
+            }
+                <NavLink class="btn btn-secondary text-white btn-sm">@currentPage</NavLink>
+                <NavLink class="btn btn-secondary btn-sm" href="@GetForwardUrl(currentPage)">Next Page</NavLink>
+            </div>
+ 
+    </div>
+</div>
+
+
+
+
+@*<NavLink class="btn btn-block btn-outline-primary" href="/admin/crashes" ActiveClass="btn-primary text-white" Match="NavLinkMatch.Prefix">See All Crash Data</NavLink>*@
+
+
+@code {
+    //grab data
+    public ICrashRepository repo => Service;
+
+    public IEnumerable<Crash> CrashData { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        await UpdateData();
+    }
+
+    public async Task UpdateData()
+    {
+        int PageSize = 10;
+        currentPage = currentPage == 0 ? 1 : currentPage;
+
+        var skip = PageSize * (Convert.ToInt32(currentPage) - 1);
+        CrashData = await repo.Crashes.Skip(skip).Take(PageSize).ToListAsync();
+        @*CrashData = await repo.Crashes.ToListAsync();*@
+    }
+
+    //separate variable for holding ten crashes at a time for pagination
+    public IEnumerable<Crash> SmallCrashData { get; set; } = Enumerable.Empty<Crash>();
+
+    // edit/delete functionality
+    public string GetDetailsUrl(long id) => $"/admin/crashes/details/{id}";
+    public string GetEditUrl(long id) => $"/admin/crashes/edit/{id}";
+    public string GetBackUrl(int pageNum) => $"/admin/{pageNum - 1}";
+    public string GetForwardUrl(int pageNum) => $"/admin/{pageNum + 1}";
+
+
+    public async Task RemoveCrash(Crash c)
+    {
+        repo.DeleteCrash(c);
+        await UpdateData();
+    }
+
+    // paging functionality
+    [Parameter]
+    public int currentPage { get; set; }
+
+    PagingInfo pagingInfo = new PagingInfo();
+
+    protected override void OnParametersSet()
+    {
+        CreatePagingInfo();
+    }
+
+    public void CreatePagingInfo()
+    {
+        @*var AllStudents = Context.Student.Include(p => p.School_R).Include(p => p.Location_R);*@
+
+        @*int PageSize = 10;
+            pagingInfo = new PagingInfo();*@
+        @*pagingInfo.ItemsPerPage = PageSize;
+            page = page == 0 ? 1 : page;
+            pagingInfo.CurrentPage = page;
+            pagingInfo.TotalItems = CrashData.Count();
+            pagingInfo.TotalPages = (int)Math.Ceiling((decimal)pagingInfo.TotalItems / pagingInfo.ItemsPerPage);*@
+
+
+        @*var skip = PageSize * (Convert.ToInt32(page) - 1);
+            SmallCrashData = CrashData.Skip(skip).Take(PageSize).ToList();*@
+        var pageBack = currentPage - 1;
+        var pageForward = currentPage + 1;
+    }
+}
+

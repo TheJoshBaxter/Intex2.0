@@ -1,0 +1,103 @@
+﻿@{
+    ViewData["Title"] = "Edit Crash";
+}
+
+@model UtahTraffix.Models.Crash
+
+<div>
+    <h1 class="myTitle">Edit Crash Record: </h1>
+
+    <form method="post">
+        <div asp-validation-summary="All"></div>
+
+        <input hidden asp-for="CRASH_ID" />
+
+        <label asp-for="CRASH_DATETIME">Date of Crash:</label>
+        <input asp-for="CRASH_DATETIME" /><br />
+
+        <label asp-for="ROUTE">Route:</label>
+        <input asp-for="ROUTE" /><br />
+
+        <label asp-for="MILEPOINT">Milepoint:</label>
+        <input asp-for="MILEPOINT" /><br />
+
+        <label asp-for="LAT_UTM_Y">Lattitude :</label>
+        <input asp-for="LAT_UTM_Y" /><br />
+
+        <label asp-for="LONG_UTM_X">Longitude:</label>
+        <input asp-for="LONG_UTM_X" /><br />
+
+        <label asp-for="MAIN_ROAD_NAME">Main Road Name:</label>
+        <input asp-for="MAIN_ROAD_NAME" /><br />
+
+        <label asp-for="CITY">City:</label>
+        <input asp-for="CITY" /><br />
+
+        <label asp-for="COUNTY_NAME">Counth Name:</label>
+        <input asp-for="COUNTY_NAME" /><br />
+
+        <label asp-for="CRASH_SEVERITY_ID">Crash Severity:</label>
+        <input asp-for="CRASH_SEVERITY_ID" /><br />
+
+        <label asp-for="WORK_ZONE_RELATED">Work Zone Related:</label>
+        <input asp-for="WORK_ZONE_RELATED" type="checkbox" /><br />
+
+        <label asp-for="PEDESTRIAN_INVOLVED">Pedestrian Involved:</label>
+        <input asp-for="PEDESTRIAN_INVOLVED" type="checkbox"/><br />
+
+        <label asp-for="BICYCLIST_INVOLVED">Bicyclist Involved:</label>
+        <input asp-for="BICYCLIST_INVOLVED" type="checkbox" /><br />
+
+        <label asp-for="MOTORCYCLE_INVOLVED">Bicyclist Involved:</label>
+        <input asp-for="MOTORCYCLE_INVOLVED" type="checkbox" /><br />
+
+        <label asp-for="IMPROPER_RESTRAINT">Improper Restraint:</label>
+        <input asp-for="IMPROPER_RESTRAINT" type="checkbox" /><br />
+
+        <label asp-for="UNRESTRAINED">Unrestrained:</label>
+        <input asp-for="UNRESTRAINED" type="checkbox" /><br />
+
+        <label asp-for="DUI">DUI:</label>
+        <input asp-for="DUI" type="checkbox" /><br />
+
+        <label asp-for="INTERSECTION_RELATED">Intersection Related:</label>
+        <input asp-for="INTERSECTION_RELATED" type="checkbox"><br />
+
+        <label asp-for="WILD_ANIMAL_RELATED">Wild Animal Related:</label>
+        <input asp-for="WILD_ANIMAL_RELATED" type="checkbox"><br />
+
+        <label asp-for="DOMESTIC_ANIMAL_RELATED">Domestic Animal Related</label>
+        <input asp-for="DOMESTIC_ANIMAL_RELATED" type="checkbox"><br />
+
+        <label asp-for="OVERTURN_ROLLOVER">Overturn Rollover:</label>
+        <input asp-for="OVERTURN_ROLLOVER" type="checkbox" /><br />
+
+        <label asp-for="COMMERCIAL_MOTOR_VEH_INVOLVED">Commerial Vehicle Involved:</label>
+        <input asp-for="COMMERCIAL_MOTOR_VEH_INVOLVED" type="checkbox" /><br />
+
+        <label asp-for="TEENAGE_DRIVER_INVOLVED">Teenage Driver Involved:</label>
+        <input asp-for="TEENAGE_DRIVER_INVOLVED" type="checkbox" /><br />
+
+        <label asp-for="OLDER_DRIVER_INVOLVED">Older Driver Involved:</label>
+        <input asp-for="OLDER_DRIVER_INVOLVED" type="checkbox"/><br />
+
+        <label asp-for="NIGHT_DARK_CONDITION">Night Driving:</label>
+        <input asp-for="NIGHT_DARK_CONDITION" type="checkbox"/><br />
+
+        <label asp-for="SINGLE_VEHICLE">Single Vehicle:</label>
+        <input asp-for="SINGLE_VEHICLE" type="checkbox"/><br />
+
+        <label asp-for="DISTRACTED_DRIVING">Distracted Driving:</label>
+        <input asp-for="DISTRACTED_DRIVING" type="checkbox"/><br />
+
+        <label asp-for="DROWSY_DRIVING">Drowsy Driving:</label>
+        <input asp-for="DROWSY_DRIVING" type="checkbox"/><br />
+
+        <label asp-for="ROADWAY_DEPARTURE">Roadway Departure:</label>
+        <input asp-for="ROADWAY_DEPARTURE" type="checkbox"/><br />
+
+        <br />
+        <button class="btn btn-primary" type="submit">Submit</button>
+
+    </form>
+</div>

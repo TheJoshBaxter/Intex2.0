@@ -1,0 +1,128 @@
+﻿@page "/admin/crashes/edit/{id:long}"
+@page "/admin/crashes/create"
+@inherits OwningComponentBase<ICrashRepository>
+
+<style>
+    div.validation-message {color:rgb(220,55,70); font-weight:500}
+</style>
+<div class="main">
+    <h3 class="bg-@ThemeColor text-white text-center p-1 myTitle">@TitleText a Crash</h3>
+
+    <EditForm Model="c" OnValidSubmit="SaveCrash">
+
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+
+        <div class="form-group">
+            <label>Crash Id</label>
+            <input class="form-control" disabled value="@c.CRASH_ID" />
+        </div>
+
+
+        <div class="form-group">
+            <label>Date/Time</label>
+            <ValidationMessage For="@(() => c.CRASH_DATETIME)"></ValidationMessage>
+            <InputDate type="datetime" class="form-control" @bind-Value="c.CRASH_DATETIME"></InputDate>
+
+        </div>
+
+        <div class="form-group">
+            <label>Route</label>
+            <ValidationMessage For="@(() => c.ROUTE)"></ValidationMessage>
+            <InputNumber class="form-control" @bind-Value="c.ROUTE"></InputNumber>
+
+        </div>
+
+        <div class="form-group">
+            <label>Milepoint</label>
+            <ValidationMessage For="@(() => c.MILEPOINT)"></ValidationMessage>
+            <InputNumber class="form-control" @bind-Value="c.MILEPOINT"></InputNumber>
+
+        </div>
+
+        <div class="form-group">
+            <label>Lattitude</label>
+            <ValidationMessage For="@(() => c.LAT_UTM_Y)"></ValidationMessage>
+            <InputNumber class="form-control" @bind-Value="c.LAT_UTM_Y"></InputNumber>
+
+        </div>
+
+        <div class="form-group">
+            <label>Longitude</label>
+            <ValidationMessage For="@(() => c.LONG_UTM_X)"></ValidationMessage>
+            <InputNumber class="form-control" @bind-Value="c.LONG_UTM_X"></InputNumber>
+
+        </div>
+
+        <div class="form-group">
+            <label>Main Road Name</label>
+            <ValidationMessage For="@(() => c.MAIN_ROAD_NAME)"></ValidationMessage>
+            <InputText class="form-control" @bind-Value="c.MAIN_ROAD_NAME"></InputText>
+
+        </div>
+
+        <div class="form-group">
+            <label>City</label>
+            <ValidationMessage For="@(() => c.CITY)"></ValidationMessage>
+            <InputText class="form-control" @bind-Value="c.CITY"></InputText>
+
+        </div>
+
+        <div class="form-group">
+            <label>County</label>
+            <ValidationMessage For="@(() => c.COUNTY_NAME)"></ValidationMessage>
+            <InputText class="form-control" @bind-Value="c.COUNTY_NAME"></InputText>
+
+        </div>
+
+        <div class="form-group">
+            <label>Crash Severity Rating</label>
+            <ValidationMessage For="@(() => c.CRASH_SEVERITY_ID)"></ValidationMessage>
+            <InputNumber class="form-control" @bind-Value="c.CRASH_SEVERITY_ID"></InputNumber>
+
+        </div>
+
+        <button type="submit" class="btn btn-@ThemeColor">Save</button>
+        <NavLink class="btn btn-secondary" href="/admin/crashes">Cancel</NavLink>
+
+    </EditForm>
+</div>
+
+
+
+@code {
+    [Parameter]
+    public long Id { get; set; } = 0;
+
+    public string ThemeColor => Id == 0 ? "primary" : "warning";
+
+    public string TitleText => Id == 0 ? "Create" : "Edit";
+
+    public Crash c { get; set; } = new Crash(); //if one isn't passed, set up a new crash instance
+
+    public ICrashRepository repo => Service;
+
+    protected override void OnParametersSet()
+    {
+        if (Id != 0)
+        {
+            c = repo.Crashes.FirstOrDefault(x => x.CRASH_ID == Id);
+        }
+    }
+
+    public void SaveCrash()
+    {
+        if (Id == 0)
+        {
+            repo.CreateCrash(c);
+        }
+        else
+        {
+            repo.SaveCrash(c);
+        }
+
+        NavManager.NavigateTo("/admin/crashes"); 
+    }
+
+    [Inject]
+    public NavigationManager NavManager { get; set; }
+}
