@@ -183,5 +183,11 @@ namespace UtahTraffix.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult DataAnalytics()
+        {
+            return View();
+        }
     }
 }

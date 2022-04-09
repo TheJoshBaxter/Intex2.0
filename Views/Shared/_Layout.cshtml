@@ -47,29 +47,38 @@
                         <li class="nav-item">
                             <a class="nav-link text-muted" asp-area="" asp-controller="Home" asp-action="Predict">Make a Prediction</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-muted" asp-area="" asp-controller="Home" asp-action="DataAnalytics">Data Analytics</a>
+                        </li>
+
                     </ul>
                 </div>
                 <div>
                     @if (SignInManager.IsSignedIn(User))
                     {
-                    <ul class="navbar-nav flex-grow-1 text-white">
-                        <li class="nav-item">
-                            <a class="nav-link text-muted"  href="/admin">Crash Admin</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-muted" href="/Identity/Account/Register">Register</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-muted" href="/Identity/Account/Login">Log In</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-muted" href="/Identity/Account/Manage">Manage Account</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-muted" href="/Identity/Account/Logout">Log Out</a>
-                        </li>
-                    </ul>
+                        <ul class="navbar-nav flex-grow-1 text-white">
+                            <li class="nav-item">
+                                <a class="nav-link text-muted" href="/admin">Crash Admin</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-muted" href="/Identity/Account/Register">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-muted" href="/Identity/Account/Manage">Manage Account</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-muted" href="/Identity/Account/Logout">Log Out</a>
+                            </li>
+                        </ul>
 
+                    }
+                    else
+                    {
+                        <ul>
+                            <li class="navbar-nav flex-grow-1 text-white">
+                                <a class="nav-link text-muted" href="/Identity/Account/Login">Log In</a>
+                            </li>
+                        </ul>
                     }
                 </div>
 
@@ -80,6 +89,7 @@
     <div>
         @RenderBody()
     </div>
+    <br /><br />
 
 
 
